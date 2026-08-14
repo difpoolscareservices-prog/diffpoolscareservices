@@ -67,11 +67,11 @@ export default function App() {
     resolver: zodResolver(quoteSchema),
     defaultValues: {
       fullName: '',
-      email: 'paulomondi501@gmail.com',
+      email: '',
       phone: '',
-      service: 'Swimming Pool Construction',
+      service: '',
       preferredDate: '',
-      preferredTime: 'Morning (8:00 AM - 12:00 PM)',
+      preferredTime: '',
       location: '',
       details: '',
     },
@@ -1004,6 +1004,7 @@ export default function App() {
                         {...register('service')}
                         className={`w-full bg-white border ${errors.service ? 'border-rose-400 focus:ring-rose-100' : 'border-slate-200 focus:border-blue-400 focus:ring-blue-100'} rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:ring-2 transition`}
                       >
+                        <option value="" disabled>— Select a service —</option>
                         <option value="Swimming Pool Construction">Swimming Pool Construction</option>
                         <option value="Maintenance and Servicing">Maintenance and Servicing</option>
                         <option value="Jacuzzi Construction Services">Jacuzzi Construction Services</option>
@@ -1042,6 +1043,7 @@ export default function App() {
                         {...register('preferredTime')}
                         className={`w-full bg-white border ${errors.preferredTime ? 'border-rose-400 focus:ring-rose-100' : 'border-slate-200 focus:border-blue-400 focus:ring-blue-100'} rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:ring-2 transition`}
                       >
+                        <option value="" disabled>— Select a time slot —</option>
                         <option value="Morning (8:00 AM - 12:00 PM)">Morning (8:00 AM - 12:00 PM)</option>
                         <option value="Afternoon (12:00 PM - 4:00 PM)">Afternoon (12:00 PM - 4:00 PM)</option>
                         <option value="Evening (4:00 PM - 6:00 PM)">Evening (4:00 PM - 6:00 PM)</option>
