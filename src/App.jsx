@@ -24,6 +24,7 @@ import {
   Flame,
   Waves,
   AlertTriangle,
+  AlertCircle,
   Grid,
   Sliders,
   ShoppingCart,
