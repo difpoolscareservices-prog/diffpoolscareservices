@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -55,7 +55,7 @@ export default function App() {
   const [submittedData, setSubmittedData] = useState(null);
   const [formSending, setFormSending] = useState(false);
   const [formError, setFormError] = useState(null);
-  const formRef = useRef(null);
+
 
   // React Hook Form + Zod Resolver
   const {
@@ -81,14 +81,24 @@ export default function App() {
     setFormSending(true);
     setFormError(null);
     try {
-      await emailjs.sendForm(
+      await emailjs.send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        formRef.current,
+        {
+          fullName: data.fullName,
+          email: data.email,
+          phone: data.phone,
+          service: data.service,
+          preferredDate: data.preferredDate,
+          preferredTime: data.preferredTime,
+          location: data.location,
+          details: data.details || '',
+        },
         { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY }
       );
       setSubmittedData(data);
       setFormSubmitted(true);
+      reset();
     } catch (err) {
       console.error('EmailJS error:', err);
       setFormError('Failed to send your request. Please try again or call us directly.');
@@ -946,7 +956,7 @@ export default function App() {
                   </button>
                 </div>
               ) : (
-                <form ref={formRef} onSubmit={handleSubmit(onFormSubmit)} className="space-y-4" noValidate>
+                <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-4" noValidate>
                   
                   {/* Full Name & Email */}
                   <div className="grid sm:grid-cols-2 gap-4">
